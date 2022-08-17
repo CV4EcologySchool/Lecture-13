@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import logging
+
 import pytest
 
 log = logging.getLogger('pytest.conftest')  # pylint: disable=invalid-name
@@ -13,10 +14,11 @@ def config():
 @pytest.fixture()
 def cfg(config):
     from cv4e_lecture13 import utils
+
     log = utils.init_logging()
     cfg = utils.init_config(config, log)
 
-    cfg['output'] = 'cv4e_lecture13/%s' % (cfg['output'], )
+    cfg['output'] = 'cv4e_lecture13/{}'.format(cfg['output'])
 
     return cfg
 
@@ -31,6 +33,7 @@ def device(cfg):
 @pytest.fixture()
 def net(cfg):
     from cv4e_lecture13 import model
+
     net, _, _ = model.load(cfg)
     net.eval()
 

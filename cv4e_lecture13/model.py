@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
     Model implementation.
     We'll be using a "simple" ResNet-18 for image classification here.
@@ -5,17 +6,17 @@
     2022 Benjamin Kellenberger
 '''
 
+import glob
+import os
+from os.path import exists, split, splitext
+
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import numpy as np
-import glob
-import os
-from os.path import split, splitext, exists
 
 
 class SmallModel(nn.Module):
-
     @classmethod
     def load(cls, cfg):
         log = cfg.get('log')
@@ -30,11 +31,7 @@ class SmallModel(nn.Module):
         filepaths = sorted(glob.glob(f'{output}/*.pt'))
 
         if len(filepaths) > 1:
-            filepaths = [
-                filepath 
-                for filepath in filepaths 
-                if 'best.pt' not in filepath
-            ]
+            filepaths = [filepath for filepath in filepaths if 'best.pt' not in filepath]
 
         if len(filepaths):
             filepath = filepaths[-1]
@@ -49,7 +46,7 @@ class SmallModel(nn.Module):
                 epoch = int(splitext(filename)[0])
             except ValueError:
                 pass
-                
+
             filepath = f'{output}/best.pt'
             if exists(filepath):
                 state = torch.load(open(filepath, 'rb'), map_location='cpu')
@@ -73,7 +70,7 @@ class SmallModel(nn.Module):
     def forward(self, x):
         x = F.max_pool2d(F.relu(self.conv1(x)), (2, 2))
         x = F.max_pool2d(F.relu(self.conv2(x)), 2)
-        x = torch.flatten(x, 1) 
+        x = torch.flatten(x, 1)
         x = F.relu(self.fc1(x))
         x = F.relu(self.fc2(x))
         x = self.fc3(x)

@@ -1,16 +1,17 @@
+# -*- coding: utf-8 -*-
 '''
     Various utility functions used (possibly) across scripts.
 
     2022 Benjamin Kellenberger
 '''
 
-import random
-import torch
-from torch.backends import cudnn
 import logging
+import random
 from logging.handlers import TimedRotatingFileHandler
-import yaml
 
+import torch
+import yaml
+from torch.backends import cudnn
 
 DAYS = 21
 
@@ -102,7 +103,9 @@ def init_config(config, log):
         elif torch.backends.mps.is_available():
             cfg['device'] = 'mps'
         else:
-            log.warning(f'WARNING: device set to "{device}" but not available; falling back to CPU...')
+            log.warning(
+                f'WARNING: device set to "{device}" but not available; falling back to CPU...'
+            )
             cfg['device'] = 'cpu'
 
     device = cfg.get('device')

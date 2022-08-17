@@ -2,8 +2,8 @@
 title: CV4Ecology School - Lecture 13
 metaTitle: "Serving, Hosting, and Deploying Models and Quality Control"
 emoji: 🌎
-colorFrom: red
-colorTo: purple
+colorFrom: blue
+colorTo: green
 sdk: gradio
 sdk_version: 3.1.4
 app_file: app.py

@@ -3,20 +3,20 @@
 """
 The lecture materials for Lecture 1: Dataset Prototyping and Visualization
 """
-from . import model, dataset, utils
-import torch
 import click
+import torch
 import torch.nn as nn
-from tqdm import trange
 from torch.optim import Adam
+from tqdm import trange
 
+from . import dataset, model, utils
 
 log = None
 
 
 def inference(cfg, dataloader, net, optimizer, criterion, update):
     '''
-        Our actual training function.
+    Our actual training function.
     '''
     device = cfg.get('device')
 
@@ -44,10 +44,14 @@ def inference(cfg, dataloader, net, optimizer, criterion, update):
         label_ = torch.argmax(prediction, dim=1)
         accuracy += torch.mean((label_ == labels).float()).item()
 
-        prog.set_description('[{:s}] Loss: {:.2f}; Acc: {:.2f}%'.format(type_str, loss / (index + 1), 100.0 * accuracy / (index + 1)))
+        prog.set_description(
+            '[{:s}] Loss: {:.2f}; Acc: {:.2f}%'.format(
+                type_str, loss / (index + 1), 100.0 * accuracy / (index + 1)
+            )
+        )
         prog.update(1)
     prog.close()
-    
+
     loss /= total
     accuracy /= total
 
@@ -55,7 +59,9 @@ def inference(cfg, dataloader, net, optimizer, criterion, update):
 
 
 @click.command()
-@click.option('--config', help='Path to config file', default='configs/mnist_resnet18.yaml')
+@click.option(
+    '--config', help='Path to config file', default='configs/mnist_resnet18.yaml'
+)
 def lecture(config):
     """
     Main function for Lecture 1: Dataset Prototyping and Visualization
@@ -86,15 +92,19 @@ def lecture(config):
     while epoch < epochs:
         log.info(f'Epoch {epoch}/{epochs}')
 
-        loss_train, accuracy_train = inference(cfg, train, net, optimizer, criterion, update=True)
-        loss_test, accuracy_test = inference(cfg, test, net, optimizer, criterion, update=False)
+        loss_train, accuracy_train = inference(
+            cfg, train, net, optimizer, criterion, update=True
+        )
+        loss_test, accuracy_test = inference(
+            cfg, test, net, optimizer, criterion, update=False
+        )
 
         # combine stats and save
         stats = {
             'loss_train': loss_train,
             'loss_val': loss_test,
             'accuracy_train': accuracy_train,
-            'accuracy_test': accuracy_test
+            'accuracy_test': accuracy_test,
         }
 
         best = loss_test < best_loss

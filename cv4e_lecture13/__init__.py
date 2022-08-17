@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
     2022 Benjamin Kellenberger
 '''

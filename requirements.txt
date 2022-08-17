@@ -4,13 +4,13 @@ Pillow
 numpy
 PyYAML
 tqdm
-pre-commit 
+pre-commit
 cryptography
 argparse
 gradio
-numpy 
-ipython 
-rich 
+numpy
+ipython
+rich
 click
 brunette
 pytest

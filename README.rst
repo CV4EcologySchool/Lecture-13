@@ -38,7 +38,7 @@ You need to first install Anaconda on your machine.  Below are the instructions 
 Once Anaconda is installed, you will need an environment and the following packages installed
 
 .. code:: bash
-   
+
    # Create Environment
    conda create --name cv4e
    conda activate cv4e
@@ -46,16 +46,16 @@ Once Anaconda is installed, you will need an environment and the following packa
    # Install Python dependencies
    conda install pip
 
-   conda install -r requirements.txt 
+   conda install -r requirements.txt
    conda install pytorch torchvision -c pytorch-nightly
 
 How to Run
 ----------
 
-The lecture materials will run as a single executable.  The MNIST dataset must be downloaded from the internet for this script to run correctly, so Internet access is required at first to download the files once.  It is recommended to use `ipython` and to copy sections of code into and inspecting the 
+The lecture materials will run as a single executable.  The MNIST dataset must be downloaded from the internet for this script to run correctly, so Internet access is required at first to download the files once.  It is recommended to use `ipython` and to copy sections of code into and inspecting the
 
 .. code:: bash
-   
+
    # Run with Python
    python lecture.py
 
