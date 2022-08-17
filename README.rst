@@ -64,19 +64,20 @@ The lecture materials will run as a single executable.  The MNIST dataset must b
    # Run the live demo
    python app.py
 
-
 Docker
 ------
 
 The application can also be built into a Docker image and hosted on Docker Hub.
 
 .. code:: bash
+
     docker build . -t bluemellophone/cv4e:lecture13
     docker push bluemellophone/cv4e:lecture13
 
 To run:
 
 .. code:: bash
+
     docker run \
        -it \
        --rm \
@@ -96,6 +97,7 @@ Building Documentation
 There is Sphinx documentation in the `docs/` folder, which can be built with the code below:
 
 .. code:: bash
+
     cd docs/
     sphinx-build -M html . build/
 
