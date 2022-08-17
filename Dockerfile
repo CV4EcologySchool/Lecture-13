@@ -10,6 +10,7 @@ RUN set -ex \
  && apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         git \
+        vim \
         htop \
  && rm -rf /var/cache/apt \
  && rm -rf /var/lib/apt/lists/*
@@ -19,6 +20,8 @@ WORKDIR /code
 COPY ./ /code
 
 RUN conda install pip \
- && pip install --no-cache-dir -r requirements.txt
+ && pip install --no-cache-dir -r requirements.txt \
+ && pip install numpy --upgrade \
+ && conda install pytorch torchvision torchaudio cpuonly -c pytorch-nightly
 
 CMD python app.py

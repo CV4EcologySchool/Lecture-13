@@ -10,3 +10,4 @@ coverage/
 
 __pycache__/
 docs/build
+models/

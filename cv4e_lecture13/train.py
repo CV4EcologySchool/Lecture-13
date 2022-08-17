@@ -9,7 +9,7 @@ import torch.nn as nn
 from torch.optim import Adam
 from tqdm import trange
 
-from . import dataset, model, utils
+from cv4e_lecture13 import dataset, model, utils
 
 log = None
 

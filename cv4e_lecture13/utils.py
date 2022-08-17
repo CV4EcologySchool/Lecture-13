@@ -81,7 +81,7 @@ def init_logging():
 def init_seed(seed):
     if seed is not None:
         random.seed(seed)
-        # numpy.random.seed(seed)       # we don't use NumPy in this code, but you would want to set its random number generator seed, too
+        # numpy.random.seed(seed)
         torch.manual_seed(seed)
         torch.cuda.manual_seed(seed)
         cudnn.benchmark = True
@@ -100,7 +100,7 @@ def init_config(config, log):
     if device not in ['cpu']:
         if torch.cuda.is_available():
             cfg['device'] = 'cuda'
-        elif torch.backends.mps.is_available():
+        elif hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
             cfg['device'] = 'mps'
         else:
             log.warning(
