@@ -1,0 +1,12 @@
+.DS_Store
+output.*.jpg
+*.log*
+
+*.egg-info/
+
+cv4e_lecture13/datasets/
+.coverage
+coverage/
+
+__pycache__/
+docs/build

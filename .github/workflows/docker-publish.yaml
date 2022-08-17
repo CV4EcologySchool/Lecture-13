@@ -1,0 +1,25 @@
+name: Docker
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+    tags:
+      - v*
+  schedule:
+    - cron: '0 16 * * *' # Every day at 16:00 UTC (~09:00 PT)
+
+jobs:
+  deploy:
+    name: Build Docker Image
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build
+        run: |
+          docker build . -t cv4e/lecture13:latest
