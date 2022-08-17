@@ -22,6 +22,6 @@ COPY ./ /code
 RUN conda install pip \
  && pip install --no-cache-dir -r requirements.txt \
  && pip install numpy --upgrade \
- && conda install pytorch torchvision torchaudio cpuonly -c pytorch-nightly
+ && conda install pytorch torchvision cpuonly -c pytorch-nightly
 
 CMD python app.py
