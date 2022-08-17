@@ -1,7 +1,7 @@
 
-================================================
-Lecture 1: Dataset Prototyping and Visualization
-================================================
+======================================================================
+Lecture 13: Serving, Hosting, and Deploying Models and Quality Control
+======================================================================
 
 .. contents:: Quick Links
     :backlinks: none
