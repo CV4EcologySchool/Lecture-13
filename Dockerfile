@@ -1,7 +1,9 @@
 # FROM nvidia/cuda:11.3.1-cudnn8-runtime-ubuntu20.04
 FROM continuumio/anaconda3:latest
 
-ENV GRADIO_SERVER_PORT 5000
+ENV GRADIO_SERVER_NAME=0.0.0.0
+
+ENV GRADIO_SERVER_PORT=7860
 
 # Install apt packages
 RUN set -ex \
@@ -18,8 +20,5 @@ COPY ./ /code
 
 RUN conda install pip \
  && pip install --no-cache-dir -r requirements.txt
-
-# Port for the web server
-EXPOSE 5000
 
 CMD python app.py

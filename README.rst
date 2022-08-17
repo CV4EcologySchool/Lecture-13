@@ -2,7 +2,7 @@
 Lecture 13: Serving, Hosting, and Deploying Models and Quality Control
 ======================================================================
 
-|Tests| |Wheel| |Docker| |ReadTheDocs| |Huggingface| | Colab|
+|Tests| |Wheel| |Docker| |ReadTheDocs| |Huggingface|
 
 .. contents:: Quick Links
     :backlinks: none
@@ -80,7 +80,7 @@ To run:
     docker run \
        -it \
        --rm \
-       -p 6000:5000 \
+       -p 7860:7860 \
        --name cv4e \
        bluemellophone/cv4e:lecture13
 
@@ -163,7 +163,3 @@ If you experience issues running the gradio app on macOS, try the following:
 .. |Huggingface| image:: https://img.shields.io/badge/HuggingFace-Running-yellow
     :target: https://huggingface.co/spaces/CV4EcologySchool/Lecture-13
     :alt: Huggingface
-
-.. |Colab| image:: https://colab.research.google.com/assets/colab-badge.svg
-    :target: https://colab.research.google.com/github/googlecolab/colabtools/blob/master/notebooks/colab-github-demo.ipynb
-    :alt: Open in Colab

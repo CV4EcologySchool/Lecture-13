@@ -50,4 +50,4 @@ interface = gr.Interface(
     examples=[f'examples/example_{index}.jpg' for index in range(1, 31)],
 )
 
-interface.launch()
+interface.launch(server_name='0.0.0.0')
