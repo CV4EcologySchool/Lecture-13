@@ -29,7 +29,9 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.1.0
     hooks:
+      - id: requirements-txt-fixer
       - id: check-ast
+      - id: check-yaml
       - id: check-toml
       - id: check-executables-have-shebangs
       - id: check-docstring-first
