@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import gradio as gr
+import numpy as np  # NOQA
 import torch
 from PIL import Image, ImageOps  # NOQA
 from torchvision.transforms import Compose, Resize, ToTensor

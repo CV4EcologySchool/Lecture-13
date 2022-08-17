@@ -1,7 +1,8 @@
-
 ======================================================================
 Lecture 13: Serving, Hosting, and Deploying Models and Quality Control
 ======================================================================
+
+|Tests| |Wheel| |Docker| |ReadTheDocs| |Huggingface| | Colab|
 
 .. contents:: Quick Links
     :backlinks: none
@@ -11,11 +12,11 @@ Lecture 13: Serving, Hosting, and Deploying Models and Quality Control
 Introduction
 ------------
 
-.. image:: https://github.com/CV4EcologySchool/Lecture-1/raw/main/intro.jpg
-    :target: https://docs.google.com/presentation/d/1Bm9ZvQC6Y1SW_xAHHbMvhsRRb87tgzIimM0YKEXEA6w/edit?usp=sharing
-    :alt: "Lecture 1: Dataset Prototyping and Visualization"
+.. image:: https://github.com/CV4EcologySchool/Lecture-13/raw/main/intro.jpg
+    :target: https://drive.google.com/drive/u/0/folders/1zozC7vTKU0KMnAcMPt_vR8m7QBPO2UYK
+    :alt: "Lecture 13: Serving, Hosting, and Deploying Models and Quality Control"
 
-This repository holds the lecture materials for the `Computer Vision for Ecology workshop at CalTech <https://cv4ecology.caltech.edu>`_.  The goal of this lecture is to describe which qualities are idea for prototype ML datasets and a review of PyTorch's DataLoaders and Tensors.  Lecture 1 also reviews the overall lecture structure for the three week course, review the milestone due tomorrow (Week 1, Day 2), review the tools and technologies and terms that are common for ML applications.
+This repository holds the lecture materials for the `Computer Vision for Ecology workshop at CalTech <https://cv4ecology.caltech.edu>`_.  The goal of this lecture is to describe how to deploy a machine learning model for others to use, and how best to perform quality control.
 
 The associated slides for this lecture can be viewed by clicking on the image above.
 
@@ -56,22 +57,55 @@ The lecture materials will run as a single executable.  The MNIST dataset must b
 
 .. code:: bash
 
-   # Run with Python
-   python lecture.py
+   # Run the training script
+   cd cv4e_lecture13/
+   python train.py
 
-   # Run with iPython
-   ipython lecture.py
+   # Run the live demo
+   python app.py
 
-   # Run as an executable
-   ./lecture.py
+
+Docker
+------
+
+The application can also be built into a Docker image and hosted on Docker Hub.
+
+.. code:: bash
+    docker build . -t bluemellophone/cv4e:lecture13
+    docker push bluemellophone/cv4e:lecture13
+
+To run:
+
+.. code:: bash
+    docker run \
+       -it \
+       --rm \
+       -p 6000:5000 \
+       --name cv4e \
+       bluemellophone/cv4e:lecture13
+
+Unit Tests
+----------
+
+You can run the automated tests in the `tests/` folder by running `pytest`.  This will give an output of which tests have failed.  You may also get a coverage percentage by running `coverage html` and loading the `coverage/html/index.html` file in your browser.
+pytest
+
+Building Documentation
+----------------------
+
+There is Sphinx documentation in the `docs/` folder, which can be built with the code below:
+
+.. code:: bash
+    cd docs/
+    sphinx-build -M html . build/
 
 Logging
 -------
 
-The script uses Python's built-in logging functionality called `logging`.  All print functions are replaced with `log.info` within this script, which sends the output to two places: 1) the terminal window, 2) the file `lecture_1.log`.  Get into the habit of writing text logs and keeping date-specific versions for comparison and debugging.
+The script uses Python's built-in logging functionality called `logging`.  All print functions are replaced with `log.info` within this script, which sends the output to two places: 1) the terminal window, 2) the file `lecture.log`.  Get into the habit of writing text logs and keeping date-specific versions for comparison and debugging.
 
-Code Formatting (Optional)
---------------------------
+Code Formatting
+---------------
 
 It's recommended that you use ``pre-commit`` to ensure linting procedures are run
 on any code you write. (See also `pre-commit.com <https://pre-commit.com/>`_)
@@ -92,18 +126,44 @@ The code base has been formatted by Brunette, which is a fork and more configura
 See Also
 --------
 
+- https://pytorch.org/tutorials/intermediate/flask_rest_api_tutorial.html
+- https://pytorch.org/vision/stable/models.html#quantized-models
+- https://dvc.org/blog/scipy-2020-dvc-poster
+- https://godatadriven.com/blog/a-practical-guide-to-setuptools-and-pyproject-toml/
+- https://neptune.ai/blog/machine-learning-model-management
+- https://neptune.ai/blog/mlops
 - https://github.com/readthedocs-examples/example-sphinx-basic/
 - https://github.com/CV4EcologySchool/ct_classifier
 - https://docs.python.org/3/distutils/setupscript.html
 
+Troubleshooting
+---------------
+If you experience issues running the gradio app on macOS, try the following:
 
+.. code:: bash
 
-brew install openssl
+    brew install openssl
 
-docker build . -t cv4e/lecture13:latest
+.. |Tests| image:: https://github.com/CV4EcologySchool/Lecture-13/actions/workflows/testing.yml/badge.svg?branch=main
+    :target: https://github.com/CV4EcologySchool/Lecture-13/actions/workflows/testing.yml
+    :alt: GitHub CI
 
-pytest
+.. |Wheel| image:: https://github.com/CV4EcologySchool/Lecture-13/actions/workflows/python-publish.yml/badge.svg
+    :target: https://github.com/CV4EcologySchool/Lecture-13/actions/workflows/python-publish.yml
+    :alt: Python Wheel
 
-coverage html
+.. |Docker| image:: https://img.shields.io/docker/image-size/bluemellophone/cv4e/lecture13
+    :target: https://hub.docker.com/r/bluemellophone/cv4e
+    :alt: Docker
 
-sphinx-build -M html . _build/
+.. |ReadTheDocs| image:: https://readthedocs.org/projects/cv4ecology-lecture-13/badge/?version=latest
+    :target: https://cv4ecology-lecture-13.readthedocs.io/en/latest/?badge=latest
+    :alt: ReadTheDocs
+
+.. |Huggingface| image:: https://img.shields.io/badge/HuggingFace-Running-yellow
+    :target: https://huggingface.co/spaces/CV4EcologySchool/Lecture-13
+    :alt: Huggingface
+
+.. |Colab| image:: https://colab.research.google.com/assets/colab-badge.svg
+    :target: https://colab.research.google.com/github/googlecolab/colabtools/blob/master/notebooks/colab-github-demo.ipynb
+    :alt: Open in Colab

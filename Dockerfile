@@ -17,9 +17,9 @@ WORKDIR /code
 COPY ./ /code
 
 RUN conda install pip \
- && pip install -r requirements.txt
+ && pip install --no-cache-dir -r requirements.txt
 
 # Port for the web server
 EXPOSE 5000
 
-ENTRYPOINT ["python app.py"]
+CMD python app.py

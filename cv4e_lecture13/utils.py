@@ -26,7 +26,7 @@ def init_logging():
     from rich.style import Style
     from rich.theme import Theme
 
-    name = 'lecture_1'
+    name = 'lecture'
 
     # Setup placeholder for logging handlers
     handlers = []
